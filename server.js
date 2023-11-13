@@ -1,13 +1,12 @@
 const inquirer = require("inquirer");
 const mysql = require("mysql2");
-// const app = require("./db")
 
 
-const PORT = process.env.PORT || 3001;
+
 
 
 // Connect to database
-const db = mysql.createConnection(
+const merge = mysql.createConnection(
   {
     host: 'localhost',
     // MySQL username,
@@ -18,6 +17,8 @@ const db = mysql.createConnection(
   },
   console.log(`Connected to the employee_info_db database.`)
 );
+start();
+const PORT = process.env.PORT || 3001;
 
 // Query database
 // db.query('SELECT * FROM department', function (err, results) {
@@ -84,7 +85,7 @@ function addDepartment() {
   })
     // could I make result into answer or would that mess with the functions and calls. left as result
     .then(function (result) {
-      db.query("INSERT INTO department (name) VALUES(?)", [result.newDept], function (err, result) {
+      merge.query("INSERT INTO department (name) VALUES(?)", [result.newDept], function (err, result) {
         if (err) throw err;
         console.log(result);
         start();
@@ -112,7 +113,7 @@ function addRole() {
     })
     // could I make result into answer or would that mess with the functions and calls. left as result
     .then(function (result) {
-      db.query("INSERT INTO role (title, salary, department_id) VALUES(?,?,?)", [result.newRole, result.newSalary, result.roleDept], function (err, result) {
+      merge.query("INSERT INTO role (title, salary, department_id) VALUES(?,?,?)", [result.newRole, result.newSalary, result.roleDept], function (err, result) {
         if (err) throw err;
         console.log(result);
         start();
@@ -145,7 +146,7 @@ function addEmployee() {
     })
     // could I make result into answer or would that mess with the functions and calls. left as result
     .then(function (result) {
-      db.query("INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES(?,?,?,?)", [result.newEmployeeFirst, result.newEmployeeLast, result.employeeRole, result.employeeMan], function (err, result) {
+      merge.query("INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES(?,?,?,?)", [result.newEmployeeFirst, result.newEmployeeLast, result.employeeRole, result.employeeMan], function (err, result) {
         if (err) throw err;
         console.log(result);
         start();
@@ -168,7 +169,7 @@ function updateEmployee() {
     }])
     // this one the answers need to be reversed for it to work
     .then(function (result) {
-      db.query("UPDATE employee SET role_id =? WHERE first_name=?", [result.roleUpdate, result.employeeUpdate], function (err, result) {
+      merge.query("UPDATE employee SET role_id =? WHERE first_name=?", [result.roleUpdate, result.employeeUpdate], function (err, result) {
         if (err) throw err;
         console.log(result);
         start();
@@ -179,79 +180,28 @@ function updateEmployee() {
 
 
 function viewDepartment() {
-  db.query('SELECT * FROM department', function (err, results) {
+  merge.query('SELECT * FROM department', function (err, results) {
     console.log(results);
-  });
-
-  // Default response for any other request (Not Found)
-  app.use((req, res) => {
-    res.status(404).end();
-  });
-  app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
   });
   start();
 }
 
 function viewRole() {
-  db.query('SELECT * FROM role', function (err, results) {
+  merge.query('SELECT * FROM role', function (err, results) {
     console.log(results);
   });
 
-  // Default response for any other request (Not Found)
-  app.use((req, res) => {
-    res.status(404).end();
-  });
-  app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-  });
   start();
 }
 
 function viewEmployee() {
-  db.query('SELECT * FROM employee', function (err, results) {
+  merge.query('SELECT * FROM employee', function (err, results) {
     console.log(results);
-  });
-
-  // Default response for any other request (Not Found)
-  app.use((req, res) => {
-    res.status(404).end();
-  });
-  app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
   });
   start();
 }
 
 function quit() {
-  db.end();
+  merge.end();
   process.exit();
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// not using sequelize
-// const okToSync = process.env.NODE_ENV === "production" ? false : true;
-// sequelize.sync({ force: okToSync }).then(() => {
-//   app.listen(PORT, () => console.log('Now listening'));
-// });

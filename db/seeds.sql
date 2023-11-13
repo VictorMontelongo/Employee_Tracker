@@ -6,4 +6,4 @@ VALUES ("Sales Lead", 100000.00, 1),("Salesperson", 80000.00, 1),  ("Lead Engine
 
 
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
-VALUES  ("Eric", "Ericson", 1, 1), ("Loyd","Loydson",2,1), ("Olaf", "Olafson", 3, 3), ("Tim","Timson", 4, 3), ("Tron", "Tronson", 5, 5),("Rick", "Rickson", 6, 5), ("Ren", "Renson", 7, 7), ("Ron","Ronson", 8, 7);
+VALUES  ("Eric", "Ericson", 1, null), ("Loyd","Loydson",2,1), ("Olaf", "Olafson", 3, null), ("Tim","Timson", 4, 3), ("Tron", "Tronson", 5, null),("Rick", "Rickson", 6, 5), ("Ren", "Renson", 7, null), ("Ron","Ronson", 8, 7);
