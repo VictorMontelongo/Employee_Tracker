@@ -27,7 +27,8 @@
     
   ## Tests
     -Downloading the code information and running the index on Node.
-  
+  [Untitled_ Nov 12, 2023 11_23 PM.webm](https://github.com/VictorMontelongo/Employee_Tracker/assets/82343047/9c2125a9-1379-4add-8751-49c95154fc79)
+
 
   ## Questions
     If you have any questions about this project. Please reach me at victor@email.com. You can also find my work for this project and others at my GitHub profile [Victor Montelongo](https://github.com/Victor Montelongo) repo(https://github.com/VictorMontelongo/Employee_Tracker)
